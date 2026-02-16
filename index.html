@@ -3,353 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday Intan</title>
+    <title>Happy Birthday Klarissa</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VARIABLE SYSTEM --- */
         :root {
-            --bg-color: #FDFBF7; /* Cream White (Kertas Mewah) */
-            --accent-pink: #D4A5A5; /* Dusty Pink Muted */
-            --accent-blue: #9FB1BC; /* Slate Blue Muted */
-            --text-dark: #2D2D2D;
-            --text-light: #6E6E6E;
+            --gold: #D4AF37;
+            --rose-gold: #B76E79;
+            --deep-red: #800020;
+            --cream: #FFFDD0;
+            --bg-dark: #121212;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            height: 100vh;
+            background-color: #FDFBF7;
             overflow: hidden;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* --- LAYAR (SCREENS) --- */
         .screen {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            transition: opacity 1s ease-in-out, transform 1s ease;
+            position: absolute; width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            transition: opacity 1s ease;
         }
+        .hidden { opacity: 0; pointer-events: none; z-index: -10; }
 
-        .hidden {
-            opacity: 0;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* --- SCREEN 1: ENVELOPE (MINIMALIS) --- */
-        #screen-1 { background-color: #F2F4F6; z-index: 10; }
-
-        .envelope-wrapper {
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .envelope-wrapper:active { transform: scale(0.95); }
-
+        /* --- SCREEN 1: ENVELOPE (LUXURY) --- */
+        #screen-1 { background: #F9F9F9; z-index: 10; }
         .envelope {
             width: 300px; height: 200px;
-            background-color: var(--accent-blue);
-            border-radius: 6px;
+            background: #2C3E50; /* Royal Blue/Dark */
             position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            border-radius: 5px;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
-
-        .envelope::before { /* Flap Atas */
-            content: '';
-            position: absolute; top: 0; left: 0;
+        .envelope::before { /* Flap */
+            content: ''; position: absolute; top: 0; left: 0;
             border-left: 150px solid transparent;
             border-right: 150px solid transparent;
-            border-top: 130px solid #BCCCDC; /* Sedikit lebih terang */
-            z-index: 2;
-            transform-origin: top;
-            transition: transform 0.8s ease;
+            border-top: 130px solid #34495E;
+            z-index: 2; transition: transform 0.8s; transform-origin: top;
         }
-
-        .seal {
-            width: 45px; height: 45px;
-            background-color: #C08497; /* Merah hati mati */
+        .wax-seal {
+            width: 50px; height: 50px;
+            background: var(--gold);
             border-radius: 50%;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
+            display: flex; justify-content: center; align-items: center;
+            color: #fff; font-weight: bold; font-size: 24px;
             z-index: 3;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            border: 2px solid #FFF;
         }
+        .open .envelope::before { transform: rotateX(180deg); }
 
-        .hint {
-            margin-top: 40px;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--text-light);
-            animation: pulse 2s infinite;
+        /* --- SCREEN 2: LETTER --- */
+        #screen-2 { z-index: 9; background: #FFF; padding: 30px; }
+        .letter-box {
+            max-width: 500px; text-align: center;
+            border: 2px solid var(--gold);
+            padding: 30px; border-radius: 10px;
+            position: relative;
         }
-
-        /* --- SCREEN 2: LETTER (TYPOGRAPHY) --- */
-        #screen-2 { z-index: 9; background: #FFF; }
-
-        .letter-container {
-            max-width: 500px;
-            text-align: center;
-            padding: 40px;
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        .letter-box::after { /* Frame effect */
+            content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid var(--gold); pointer-events: none;
         }
-
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: var(--accent-pink);
-            margin-bottom: 25px;
-            line-height: 1.2;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem; color: var(--rose-gold);
+            margin-bottom: 20px;
+        }
+        p { font-size: 0.9rem; color: #555; line-height: 1.8; margin-bottom: 20px; }
+        .btn-gold {
+            background: var(--gold); color: white;
+            border: none; padding: 12px 30px; border-radius: 50px;
+            font-family: 'Playfair Display', serif; letter-spacing: 1px;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
-        p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .highlight {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        .btn-main {
-            background: var(--text-dark);
-            color: #fff;
-            border: none;
-            padding: 14px 35px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        /* --- SCREEN 3: CAKE (CINEMATIC DARK) --- */
-        #screen-3 {
-            z-index: 8;
-            background-color: #1A1A1A; /* Hampir hitam */
-            color: #FFF;
-        }
-
-        .candle-container {
+        /* --- SCREEN 3: LUXURY CAKE --- */
+        #screen-3 { z-index: 8; background: var(--bg-dark); color: var(--gold); }
+        .cake-container { position: relative; margin-top: 50px; }
+        
+        /* Kue Tingkat 1 (Bawah) */
+        .layer-bottom {
+            width: 200px; height: 80px;
+            background: #F8E7E7; /* Pink Pucat */
+            border-radius: 10px 10px 5px 5px;
             position: relative;
-            height: 200px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
+            box-shadow: inset -10px 0 rgba(0,0,0,0.05);
+        }
+        .layer-bottom::before { /* Pita Emas */
+            content: ''; position: absolute; bottom: 30px; width: 100%; height: 10px;
+            background: var(--gold);
         }
 
-        .candle {
-            width: 12px; height: 100px;
-            background: #E0E0E0;
-            border-radius: 6px;
-            position: relative;
+        /* Kue Tingkat 2 (Atas) */
+        .layer-top {
+            width: 140px; height: 70px;
+            background: #FFF;
+            border-radius: 10px 10px 0 0;
+            position: absolute; bottom: 80px; left: 50%;
+            transform: translateX(-50%);
+            box-shadow: inset -10px 0 rgba(0,0,0,0.05);
+        }
+        .drip { /* Lelehan Coklat/Gold */
+            position: absolute; top: 0; width: 100%; height: 25px;
+            background: var(--rose-gold);
+            border-radius: 10px 10px 50% 50%;
         }
 
-        .flame {
-            width: 18px; height: 30px;
-            background: rgba(255, 200, 100, 0.9);
+        /* Lilin */
+        .candle-lux {
+            width: 8px; height: 50px;
+            background: linear-gradient(to right, #FFF, #EEE);
+            position: absolute; bottom: 150px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+        .flame-lux {
+            width: 15px; height: 25px;
+            background: radial-gradient(ellipse at bottom, #FFD700, #FF4500);
+            position: absolute; top: -25px; left: 50%;
+            transform: translateX(-50%);
             border-radius: 50% 50% 20% 20%;
-            position: absolute;
-            top: -35px; left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 0 15px rgba(255, 165, 0, 0.6), 0 0 40px rgba(255, 165, 0, 0.3);
-            animation: flicker 2s infinite alternate;
-            filter: blur(0.5px);
+            animation: flicker 1.5s infinite;
             cursor: pointer;
-            z-index: 10;
+            box-shadow: 0 0 20px #FFD700;
         }
+        @keyframes flicker { 0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); } 50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); } }
 
-        .smoke {
-            position: absolute; top: -40px; left: 50%;
-            width: 10px; height: 10px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            opacity: 0;
-            transform: translateX(-50%);
-        }
-
-        @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1); opacity: 1; }
-            100% { transform: translateX(-50%) scale(0.9) rotate(2deg); opacity: 0.85; }
-        }
-
-        @keyframes smokeRise {
-            0% { opacity: 0.6; transform: translateX(-50%) translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateX(-60%) translateY(-100px) scale(3); }
-        }
-
-        /* --- SCREEN 4: FINAL MESSAGE (PENGGANTI FOTO) --- */
-        #screen-4 {
-            z-index: 7;
-            background: #FDFBF7;
-            text-align: center;
-        }
-
-        .final-text {
+        /* --- SCREEN 4: ROMANTIC ENDING + ANIMATIONS --- */
+        #screen-4 { z-index: 7; background: #1a0b0b; text-align: center; overflow: hidden; }
+        
+        .romantic-text {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: var(--accent-pink);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.5s ease;
+            color: #FFF; z-index: 10; position: relative;
+            opacity: 0; transform: translateY(30px);
+            transition: all 2s ease;
+        }
+        .romantic-text h1 { font-size: 3rem; color: var(--rose-gold); margin-bottom: 10px; font-family: 'Great Vibes'; }
+        .romantic-text p { font-size: 1.1rem; color: #EEE; font-weight: 300; max-width: 80%; margin: 0 auto; }
+        
+        /* Fireworks CSS */
+        .firework {
+            position: absolute; width: 5px; height: 5px; border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(30); opacity: 0; }
         }
 
-        .sub-text {
-            margin-top: 20px;
-            font-size: 1rem;
-            color: var(--text-light);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.5s ease 0.5s; /* Delay muncul */
+        /* Balloon CSS */
+        .balloon {
+            position: absolute; bottom: -100px;
+            width: 40px; height: 50px;
+            background: var(--rose-gold);
+            border-radius: 50%;
+            animation: floatUp 5s linear infinite;
+            opacity: 0.8;
         }
-
-        .big-heart {
-            font-size: 5rem;
-            color: #C08497;
-            margin-top: 40px;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
+        .balloon::before { /* Tali */
+            content: ''; position: absolute; bottom: -10px; left: 50%;
+            width: 1px; height: 20px; background: #FFF;
         }
-
-        /* Utility */
-        .show-up { opacity: 1 !important; transform: translateY(0) !important; }
-        .pop-up { opacity: 1 !important; transform: scale(1) !important; }
-        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+        @keyframes floatUp { 0% { bottom: -100px; } 100% { bottom: 120vh; } }
 
     </style>
 </head>
 <body>
 
     <div id="screen-1" class="screen">
-        <div class="envelope-wrapper" onclick="openEnvelope()">
-            <div class="envelope">
-                <div class="seal">❤️</div>
-            </div>
+        <div class="envelope" onclick="openEnvelope()">
+            <div class="wax-seal">K</div>
         </div>
-        <div class="hint">Ketuk untuk membuka</div>
+        <p style="margin-top: 40px; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">For Klarissa Intan Majestica</p>
     </div>
 
     <div id="screen-2" class="screen hidden">
-        <div class="letter-container">
-            <h1>Dearest Intan,</h1>
+        <div class="letter-box">
+            <h1>Dearest Klarissa,</h1>
             <p>
-                "Selamat ulang tahun sayang. Di hari ini kamu mulai dewasa, dan aku selalu berdoa apa yang kamu dan kita semogakan, segera tersemogakan.<br><br>
-                Mungkin kewajibanmu akan terasa lebih berat, tapi ingat, <span class="highlight">aku akan selalu ada di samping kamu.</span>"
+                "Selamat ulang tahun sayang. Di hari ini kamu mulai dewasa, dan aku selalu berdoa apa yang kamu dan kita semogakan, semoga segera tersemogakan.
+                <br><br>
+                Mungkin kewajibanmu akan terasa lebih berat, tapi ingat sayang, <b style="color: #B76E79;">aku akan selalu ada di samping kamu.</b>"
             </p>
-            <p style="font-size: 0.8rem; margin-top: -10px; color: #999;">— Zaenal</p>
-            <button class="btn-main" onclick="toCake()">Make a Wish</button>
+            <button class="btn-gold" onclick="toCake()">Make a Wish ✨</button>
         </div>
     </div>
 
     <div id="screen-3" class="screen hidden">
-        <h2 style="font-family: 'Playfair Display'; font-weight: 400; margin-bottom: 80px; letter-spacing: 2px;">Make a Wish...</h2>
-        <div class="candle-container">
-            <div class="candle">
-                <div class="flame" id="flame" onclick="blowCandle()"></div>
-                <div class="smoke" id="smoke"></div>
+        <h2 style="font-family: 'Playfair Display'; color: var(--gold); margin-bottom: 60px;">Make a Wish...</h2>
+        <div class="cake-container">
+            <div class="candle-lux">
+                <div class="flame-lux" id="flame" onclick="blowCandle()"></div>
             </div>
+            <div class="layer-top"><div class="drip"></div></div>
+            <div class="layer-bottom"></div>
         </div>
-        <p style="margin-top: 60px; font-size: 0.75rem; opacity: 0.5; letter-spacing: 1px;">KETUK API UNTUK MENIUP</p>
+        <p style="margin-top: 80px; font-size: 0.8rem; color: #666;">(Ketuk api lilin untuk meniup)</p>
     </div>
 
     <div id="screen-4" class="screen hidden">
-        <div class="final-text">Happy Birthday</div>
-        <div class="sub-text">Once again, I love you.</div>
-        <div class="big-heart">❤️</div>
+        <div class="romantic-text" id="final-text">
+            <h1>I Love You</h1>
+            <p>
+                You are my today and all of my tomorrows.<br>
+                Happy Birthday, <b>Klarissa Intan Majestica</b>.
+            </p>
+            <br>
+            <p style="font-size: 3rem;">❤️</p>
+        </div>
     </div>
 
     <script>
-        // Transisi Amplop ke Surat
         function openEnvelope() {
-            const flap = document.querySelector('.envelope::before');
-            const screen1 = document.getElementById('screen-1');
-            const screen2 = document.getElementById('screen-2');
-
-            // Animasi CSS manual lewat style
-            document.querySelector('.envelope').style.transform = "scale(1.2)";
-            // Efek membuka flap tidak bisa sempurna lewat JS inline di pseudo-element, 
-            // jadi kita mainkan opacity layar saja agar smooth.
-            
-            screen1.style.opacity = '0';
+            document.querySelector('.screen').classList.add('open');
             setTimeout(() => {
-                screen1.classList.add('hidden');
-                screen2.classList.remove('hidden');
+                document.getElementById('screen-1').classList.add('hidden');
+                document.getElementById('screen-2').classList.remove('hidden');
             }, 800);
         }
 
-        // Transisi Surat ke Kue
         function toCake() {
-            const screen2 = document.getElementById('screen-2');
-            const screen3 = document.getElementById('screen-3');
+            document.getElementById('screen-2').classList.add('hidden');
+            document.getElementById('screen-3').classList.remove('hidden');
+        }
 
-            screen2.style.opacity = '0';
+        function blowCandle() {
+            // Matikan Api
+            document.getElementById('flame').style.opacity = '0';
+            
             setTimeout(() => {
-                screen2.classList.add('hidden');
-                screen3.classList.remove('hidden');
+                // Pindah Screen
+                document.getElementById('screen-3').classList.add('hidden');
+                document.getElementById('screen-4').classList.remove('hidden');
+                
+                // Munculkan Teks
+                setTimeout(() => {
+                    document.getElementById('final-text').style.opacity = '1';
+                    document.getElementById('final-text').style.transform = 'translateY(0)';
+                }, 500);
+
+                // Mulai Animasi
+                startCelebration();
+            }, 1000);
+        }
+
+        function startCelebration() {
+            // 1. BALON
+            setInterval(() => {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.backgroundColor = ['#B76E79', '#D4AF37', '#FFF'][Math.floor(Math.random()*3)];
+                balloon.style.animationDuration = (Math.random() * 2 + 3) + 's'; // Kecepatan acak
+                document.getElementById('screen-4').appendChild(balloon);
+                
+                // Hapus elemen biar gak berat
+                setTimeout(() => balloon.remove(), 6000);
+            }, 300);
+
+            // 2. KEMBANG API (Sederhana tapi efektif)
+            setInterval(() => {
+                createFirework();
             }, 800);
         }
 
-        // Transisi Tiup Lilin ke Final
-        function blowCandle() {
-            const flame = document.getElementById('flame');
-            const smoke = document.getElementById('smoke');
-            const screen3 = document.getElementById('screen-3');
-            const screen4 = document.getElementById('screen-4');
-
-            // Api Mati
-            flame.style.opacity = '0';
-            flame.style.transform = 'scale(0)';
+        function createFirework() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * (window.innerHeight / 2); // Kembang api di atas aja
+            const colors = ['#FFD700', '#FF4500', '#00FF00', '#00FFFF', '#FF69B4'];
             
-            // Asap Muncul
-            smoke.style.animation = 'smokeRise 2s forwards';
-
-            // Pindah Layar
-            setTimeout(() => {
-                screen3.style.opacity = '0';
-                setTimeout(() => {
-                    screen3.classList.add('hidden');
-                    screen4.classList.remove('hidden');
-                    
-                    // Animasi Final Text Muncul
-                    setTimeout(() => {
-                        document.querySelector('.final-text').classList.add('show-up');
-                        document.querySelector('.sub-text').classList.add('show-up');
-                        document.querySelector('.big-heart').classList.add('pop-up');
-                    }, 100);
-
-                }, 1000);
-            }, 1500);
+            const firework = document.createElement('div');
+            firework.style.position = 'absolute';
+            firework.style.left = x + 'px';
+            firework.style.top = y + 'px';
+            firework.style.width = '5px';
+            firework.style.height = '5px';
+            firework.style.borderRadius = '50%';
+            firework.style.boxShadow = `0 0 10px 5px ${colors[Math.floor(Math.random() * colors.length)]}`;
+            firework.style.animation = 'explode 0.5s ease-out forwards';
+            
+            document.getElementById('screen-4').appendChild(firework);
+            setTimeout(() => firework.remove(), 500);
         }
     </script>
 </body>
