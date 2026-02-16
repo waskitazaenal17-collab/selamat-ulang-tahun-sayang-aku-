@@ -13,9 +13,8 @@
         :root {
             --gold: #D4AF37;
             --rose-gold: #B76E79;
-            --deep-red: #800020;
             --cream: #FFFDD0;
-            --bg-dark: #121212;
+            --bg-dark: #0F0F0F;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,281 +23,335 @@
             background-color: #FDFBF7;
             overflow: hidden;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
         }
 
         .screen {
             position: absolute; width: 100%; height: 100%;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
-            transition: opacity 1s ease;
+            transition: all 1s ease;
         }
-        .hidden { opacity: 0; pointer-events: none; z-index: -10; }
+        .hidden { opacity: 0; pointer-events: none; z-index: -10 !important; }
 
-        /* --- SCREEN 1: ENVELOPE (LUXURY) --- */
-        #screen-1 { background: #F9F9F9; z-index: 10; }
+        /* --- SCREEN 1: ENVELOPE --- */
+        #screen-1 { background: #F4F4F4; z-index: 10; }
+        .envelope-container { position: relative; cursor: pointer; z-index: 2; }
         .envelope {
-            width: 300px; height: 200px;
-            background: #2C3E50; /* Royal Blue/Dark */
-            position: relative;
-            border-radius: 5px;
+            width: 320px; height: 220px;
+            background: #1A2634; /* Deep Navy Blue */
+            border-radius: 8px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
             display: flex; justify-content: center; align-items: center;
-            cursor: pointer;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            position: relative; overflow: hidden;
         }
-        .envelope::before { /* Flap */
-            content: ''; position: absolute; top: 0; left: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 130px solid #34495E;
-            z-index: 2; transition: transform 0.8s; transform-origin: top;
+        .flap {
+            position: absolute; top: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 140px solid #243447; /* Slightly lighter navy */
+            z-index: 3; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: top;
         }
         .wax-seal {
-            width: 50px; height: 50px;
+            width: 60px; height: 60px;
             background: var(--gold);
             border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            color: #fff; font-weight: bold; font-size: 24px;
-            z-index: 3;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-            border: 2px solid #FFF;
+            color: #1A2634; font-family: 'Great Vibes'; font-size: 32px;
+            z-index: 4;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.3);
+            background: radial-gradient(circle at 30% 30%, #FFD700, #DAA520);
         }
-        .open .envelope::before { transform: rotateX(180deg); }
+        .envelope-container.open .flap { transform: rotateX(180deg); z-index: 1; }
+
+        /* Efek Gold Dust saat buka amplop */
+        .gold-particle {
+            position: absolute; width: 8px; height: 8px;
+            background: var(--gold); border-radius: 50%;
+            z-index: 1; pointer-events: none;
+        }
 
         /* --- SCREEN 2: LETTER --- */
         #screen-2 { z-index: 9; background: #FFF; padding: 30px; }
-        .letter-box {
+        .letter-content {
             max-width: 500px; text-align: center;
-            border: 2px solid var(--gold);
-            padding: 30px; border-radius: 10px;
-            position: relative;
-        }
-        .letter-box::after { /* Frame effect */
-            content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
-            border: 1px solid var(--gold); pointer-events: none;
-        }
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem; color: var(--rose-gold);
-            margin-bottom: 20px;
-        }
-        p { font-size: 0.9rem; color: #555; line-height: 1.8; margin-bottom: 20px; }
-        .btn-gold {
-            background: var(--gold); color: white;
-            border: none; padding: 12px 30px; border-radius: 50px;
-            font-family: 'Playfair Display', serif; letter-spacing: 1px;
-            cursor: pointer; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        /* --- SCREEN 3: LUXURY CAKE --- */
-        #screen-3 { z-index: 8; background: var(--bg-dark); color: var(--gold); }
-        .cake-container { position: relative; margin-top: 50px; }
-        
-        /* Kue Tingkat 1 (Bawah) */
-        .layer-bottom {
-            width: 200px; height: 80px;
-            background: #F8E7E7; /* Pink Pucat */
-            border-radius: 10px 10px 5px 5px;
-            position: relative;
-            box-shadow: inset -10px 0 rgba(0,0,0,0.05);
-        }
-        .layer-bottom::before { /* Pita Emas */
-            content: ''; position: absolute; bottom: 30px; width: 100%; height: 10px;
-            background: var(--gold);
-        }
-
-        /* Kue Tingkat 2 (Atas) */
-        .layer-top {
-            width: 140px; height: 70px;
+            padding: 40px;
             background: #FFF;
-            border-radius: 10px 10px 0 0;
-            position: absolute; bottom: 80px; left: 50%;
-            transform: translateX(-50%);
-            box-shadow: inset -10px 0 rgba(0,0,0,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3); /* Subtle gold border */
+            box-shadow: 0 20px 60px rgba(0,0,0,0.05);
+            border-radius: 15px;
         }
-        .drip { /* Lelehan Coklat/Gold */
-            position: absolute; top: 0; width: 100%; height: 25px;
-            background: var(--rose-gold);
-            border-radius: 10px 10px 50% 50%;
+        h1 { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--rose-gold); margin-bottom: 25px; }
+        p { font-size: 1rem; color: #444; line-height: 1.8; margin-bottom: 30px; font-weight: 300; }
+        .highlight { color: var(--rose-gold); font-weight: 500; }
+        .btn-gold {
+            background: linear-gradient(45deg, var(--gold), #B88A00); color: white;
+            border: none; padding: 15px 40px; border-radius: 50px;
+            font-family: 'Playfair Display', serif; letter-spacing: 1px; font-size: 1rem;
+            cursor: pointer; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+            transition: transform 0.2s;
         }
+        .btn-gold:active { transform: scale(0.95); }
 
-        /* Lilin */
+        /* --- SCREEN 3: LUXURY CAKE (UPDATED SPACING) --- */
+        #screen-3 { z-index: 8; background: var(--bg-dark); color: var(--gold); }
+        .wish-title {
+            font-family: 'Playfair Display'; font-size: 2rem; letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            margin-bottom: 0; /* Reset margin */
+        }
+        
+        /* PERBAIKAN JARAK DI SINI */
+        .cake-container {
+            position: relative;
+            margin-top: 120px; /* Jarak yang jauh lebih lega */
+            transform: scale(1.2); /* Kue sedikit lebih besar */
+        }
+        
+        .layer-bottom {
+            width: 220px; height: 90px; background: #FCE4EC;
+            border-radius: 10px; position: relative;
+            box-shadow: inset 0 -5px 20px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .gold-trim {
+            position: absolute; bottom: 20px; width: 100%; height: 5px; background: var(--gold);
+        }
+        .layer-top {
+            width: 160px; height: 80px; background: #FFF;
+            border-radius: 10px 10px 5px 5px;
+            position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%);
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.05);
+        }
+        .drip-gold {
+            position: absolute; top: 0; width: 100%; height: 30px;
+            background: var(--gold); border-radius: 10px 10px 50% 50%;
+        }
         .candle-lux {
-            width: 8px; height: 50px;
-            background: linear-gradient(to right, #FFF, #EEE);
-            position: absolute; bottom: 150px; left: 50%;
-            transform: translateX(-50%);
-            z-index: 5;
+            width: 10px; height: 70px; background: linear-gradient(to right, #FFF, #EEE);
+            position: absolute; bottom: 170px; left: 50%; transform: translateX(-50%);
+            border-radius: 5px; z-index: 5;
         }
+        /* Api Lilin Realistis dengan Glow */
         .flame-lux {
-            width: 15px; height: 25px;
-            background: radial-gradient(ellipse at bottom, #FFD700, #FF4500);
-            position: absolute; top: -25px; left: 50%;
-            transform: translateX(-50%);
+            width: 18px; height: 30px;
+            background: radial-gradient(ellipse at center, #FFFFCC 0%, #FFD700 60%, #FF4500 100%);
+            position: absolute; top: -35px; left: 50%; transform: translateX(-50%);
             border-radius: 50% 50% 20% 20%;
-            animation: flicker 1.5s infinite;
-            cursor: pointer;
-            box-shadow: 0 0 20px #FFD700;
+            filter: blur(1px);
+            box-shadow: 0 0 20px var(--gold), 0 0 50px var(--gold), 0 0 80px #FF4500;
+            animation: flicker 1s infinite alternate; cursor: pointer;
         }
-        @keyframes flicker { 0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); } 50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); } }
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); opacity: 0.9; }
+        }
 
-        /* --- SCREEN 4: ROMANTIC ENDING + ANIMATIONS --- */
-        #screen-4 { z-index: 7; background: #1a0b0b; text-align: center; overflow: hidden; }
-        
-        .romantic-text {
-            font-family: 'Playfair Display', serif;
-            color: #FFF; z-index: 10; position: relative;
-            opacity: 0; transform: translateY(30px);
-            transition: all 2s ease;
+        /* --- SCREEN 4: FINALE REALISTIS --- */
+        #screen-4 { z-index: 7; background: radial-gradient(circle at center, #2C000E 0%, #000 100%); text-align: center; overflow: hidden; }
+        .final-msg-container {
+            z-index: 20; position: relative;
+            opacity: 0; transform: translateY(50px); transition: all 2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .romantic-text h1 { font-size: 3rem; color: var(--rose-gold); margin-bottom: 10px; font-family: 'Great Vibes'; }
-        .romantic-text p { font-size: 1.1rem; color: #EEE; font-weight: 300; max-width: 80%; margin: 0 auto; }
+        .final-msg-container h1 { font-size: 4rem; margin-bottom: 10px; text-shadow: 0 5px 20px rgba(0,0,0,0.5); }
         
-        /* Fireworks CSS */
-        .firework {
-            position: absolute; width: 5px; height: 5px; border-radius: 50%;
-            animation: explode 1s ease-out forwards;
+        /* ANIMASI BALON REALISTIS */
+        .balloon {
+            position: absolute; bottom: -150px;
+            width: 60px; height: 75px;
+            border-radius: 50% 50% 45% 45%;
+            opacity: 0.85;
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.2);
+            /* Gabungan animasi naik dan goyang */
+            animation: floatUp linear forwards, sway ease-in-out infinite alternate;
+        }
+        .balloon::after { /* Tali Balon */
+            content: ''; position: absolute; bottom: -25px; left: 50%;
+            width: 1px; height: 30px; background: rgba(255,255,255,0.6);
+        }
+        @keyframes floatUp { to { bottom: 120vh; } }
+        @keyframes sway { from { transform: translateX(-15px) rotate(-5deg); } to { transform: translateX(15px) rotate(5deg); } }
+
+        /* ANIMASI KEMBANG API PARTIKEL */
+        .firework-particle {
+            position: absolute; width: 4px; height: 4px; border-radius: 50%;
+            animation: explode ease-out forwards;
         }
         @keyframes explode {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(30); opacity: 0; }
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
         }
-
-        /* Balloon CSS */
-        .balloon {
-            position: absolute; bottom: -100px;
-            width: 40px; height: 50px;
-            background: var(--rose-gold);
-            border-radius: 50%;
-            animation: floatUp 5s linear infinite;
-            opacity: 0.8;
-        }
-        .balloon::before { /* Tali */
-            content: ''; position: absolute; bottom: -10px; left: 50%;
-            width: 1px; height: 20px; background: #FFF;
-        }
-        @keyframes floatUp { 0% { bottom: -100px; } 100% { bottom: 120vh; } }
-
     </style>
 </head>
 <body>
 
     <div id="screen-1" class="screen">
-        <div class="envelope" onclick="openEnvelope()">
-            <div class="wax-seal">K</div>
+        <div class="envelope-container" onclick="openEnvelope(event)">
+            <div class="envelope">
+                <div class="flap"></div>
+                <div class="wax-seal">K</div>
+            </div>
         </div>
-        <p style="margin-top: 40px; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">For Klarissa Intan Majestica</p>
+        <p style="margin-top: 50px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: #888;">For Klarissa Intan Majestica</p>
     </div>
 
     <div id="screen-2" class="screen hidden">
-        <div class="letter-box">
+        <div class="letter-content">
             <h1>Dearest Klarissa,</h1>
             <p>
                 "Selamat ulang tahun sayang. Di hari ini kamu mulai dewasa, dan aku selalu berdoa apa yang kamu dan kita semogakan, semoga segera tersemogakan.
                 <br><br>
-                Mungkin kewajibanmu akan terasa lebih berat, tapi ingat sayang, <b style="color: #B76E79;">aku akan selalu ada di samping kamu.</b>"
+                Mungkin kewajibanmu akan terasa lebih berat, tapi ingat sayang, <span class="highlight">aku akan selalu ada di samping kamu.</span>"
             </p>
             <button class="btn-gold" onclick="toCake()">Make a Wish ✨</button>
         </div>
     </div>
 
     <div id="screen-3" class="screen hidden">
-        <h2 style="font-family: 'Playfair Display'; color: var(--gold); margin-bottom: 60px;">Make a Wish...</h2>
+        <h2 class="wish-title">Make a Wish...</h2>
         <div class="cake-container">
             <div class="candle-lux">
                 <div class="flame-lux" id="flame" onclick="blowCandle()"></div>
             </div>
-            <div class="layer-top"><div class="drip"></div></div>
-            <div class="layer-bottom"></div>
+            <div class="layer-top"><div class="drip-gold"></div></div>
+            <div class="layer-bottom"><div class="gold-trim"></div></div>
         </div>
-        <p style="margin-top: 80px; font-size: 0.8rem; color: #666;">(Ketuk api lilin untuk meniup)</p>
+        <p style="margin-top: 120px; font-size: 0.8rem; color: rgba(255,255,255,0.5); letter-spacing: 1px;">KETUK API UNTUK MENIUP</p>
     </div>
 
     <div id="screen-4" class="screen hidden">
-        <div class="romantic-text" id="final-text">
+        <div class="final-msg-container" id="final-msg">
             <h1>I Love You</h1>
-            <p>
+            <p style="font-family: 'Playfair Display'; font-size: 1.2rem; color: #EEE;">
                 You are my today and all of my tomorrows.<br>
                 Happy Birthday, <b>Klarissa Intan Majestica</b>.
             </p>
-            <br>
-            <p style="font-size: 3rem;">❤️</p>
+            <p style="font-size: 4rem; margin-top: 30px;">❤️</p>
         </div>
     </div>
 
     <script>
-        function openEnvelope() {
-            document.querySelector('.screen').classList.add('open');
+        // --- FUNGSI EFEK BUKA AMPLOP (GOLD DUST BURST) ---
+        function openEnvelope(e) {
+            const container = document.querySelector('.envelope-container');
+            if(container.classList.contains('open')) return; // Cegah klik ganda
+            
+            container.classList.add('open');
+            
+            // Buat ledakan partikel emas dari tengah amplop
+            const rect = container.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < 50; i++) {
+                createGoldParticle(centerX, centerY);
+            }
+
+            // Pindah layar setelah animasi selesai
             setTimeout(() => {
                 document.getElementById('screen-1').classList.add('hidden');
                 document.getElementById('screen-2').classList.remove('hidden');
-            }, 800);
+            }, 1200);
         }
 
+        function createGoldParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.classList.add('gold-particle');
+            document.body.appendChild(particle);
+            
+            // Acak arah ledakan ke atas
+            const angle = (Math.random() * 90 + 45) * (Math.PI / 180); // Sudut 45-135 derajat (arah atas)
+            const velocity = Math.random() * 150 + 50;
+            const tx = Math.cos(angle) * velocity * (Math.random() > 0.5 ? 1 : -1);
+            const ty = -Math.sin(angle) * velocity * 1.5;
+
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.transform = `translate(${tx}px, ${ty}px)`;
+            particle.style.opacity = 0;
+            particle.style.transition = 'all 1s ease-out';
+            
+            setTimeout(() => particle.remove(), 1000);
+        }
+
+
+        // --- FUNGSI NAVIGASI LAINNYA ---
         function toCake() {
             document.getElementById('screen-2').classList.add('hidden');
             document.getElementById('screen-3').classList.remove('hidden');
         }
 
         function blowCandle() {
-            // Matikan Api
-            document.getElementById('flame').style.opacity = '0';
+            const flame = document.getElementById('flame');
+            flame.style.transition = 'all 0.5s ease';
+            flame.style.transform = 'translateX(-50%) scale(0)';
+            flame.style.opacity = '0';
             
             setTimeout(() => {
-                // Pindah Screen
                 document.getElementById('screen-3').classList.add('hidden');
                 document.getElementById('screen-4').classList.remove('hidden');
                 
-                // Munculkan Teks
                 setTimeout(() => {
-                    document.getElementById('final-text').style.opacity = '1';
-                    document.getElementById('final-text').style.transform = 'translateY(0)';
+                    const msg = document.getElementById('final-msg');
+                    msg.style.opacity = '1';
+                    msg.style.transform = 'translateY(0)';
                 }, 500);
 
-                // Mulai Animasi
-                startCelebration();
+                startRealAnimations();
             }, 1000);
         }
 
-        function startCelebration() {
-            // 1. BALON
+
+        // --- FUNGSI ANIMASI FINALE REALISTIS ---
+        function startRealAnimations() {
+            const screen4 = document.getElementById('screen-4');
+            const colors = ['#D4AF37', '#B76E79', '#FF69B4', '#FFF', '#FFD700'];
+
+            // 1. Balon Realistis (Goyang & Transparan)
             setInterval(() => {
                 const balloon = document.createElement('div');
                 balloon.classList.add('balloon');
-                balloon.style.left = Math.random() * 100 + 'vw';
-                balloon.style.backgroundColor = ['#B76E79', '#D4AF37', '#FFF'][Math.floor(Math.random()*3)];
-                balloon.style.animationDuration = (Math.random() * 2 + 3) + 's'; // Kecepatan acak
-                document.getElementById('screen-4').appendChild(balloon);
-                
-                // Hapus elemen biar gak berat
-                setTimeout(() => balloon.remove(), 6000);
-            }, 300);
+                balloon.style.left = Math.random() * 90 + 5 + 'vw';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                // Kecepatan naik dan kecepatan goyang diacak biar natural
+                balloon.style.animationDuration = `${Math.random()*3+5}s, ${Math.random()*2+2}s`;
+                screen4.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 8000);
+            }, 600);
 
-            // 2. KEMBANG API (Sederhana tapi efektif)
+            // 2. Kembang Api Partikel Realistis
             setInterval(() => {
-                createFirework();
-            }, 800);
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * (window.innerHeight * 0.4);
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                explodeFireworks(x, y, color);
+            }, 1200);
         }
 
-        function createFirework() {
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * (window.innerHeight / 2); // Kembang api di atas aja
-            const colors = ['#FFD700', '#FF4500', '#00FF00', '#00FFFF', '#FF69B4'];
-            
-            const firework = document.createElement('div');
-            firework.style.position = 'absolute';
-            firework.style.left = x + 'px';
-            firework.style.top = y + 'px';
-            firework.style.width = '5px';
-            firework.style.height = '5px';
-            firework.style.borderRadius = '50%';
-            firework.style.boxShadow = `0 0 10px 5px ${colors[Math.floor(Math.random() * colors.length)]}`;
-            firework.style.animation = 'explode 0.5s ease-out forwards';
-            
-            document.getElementById('screen-4').appendChild(firework);
-            setTimeout(() => firework.remove(), 500);
+        function explodeFireworks(x, y, color) {
+            const screen4 = document.getElementById('screen-4');
+            for (let i = 0; i < 30; i++) { // 30 partikel per ledakan
+                const particle = document.createElement('div');
+                particle.classList.add('firework-particle');
+                particle.style.backgroundColor = color;
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                
+                // Kalkulasi arah ledakan menyebar lingkaran
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 100 + 50;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                // Set variabel CSS untuk animasi
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                particle.style.animationDuration = Math.random() * 0.5 + 0.5 + 's';
+                
+                screen4.appendChild(particle);
+                setTimeout(() => particle.remove(), 1000);
+            }
         }
     </script>
 </body>
