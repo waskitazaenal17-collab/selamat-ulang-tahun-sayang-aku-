@@ -3,173 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untuk Intan Sayang ❤️</title>
+    <title>Spesial Untukmu ❤️</title>
     <style>
         /* --- RESET & BASIC STYLE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #f0f8ff; /* Background halaman umum */
-            overflow: hidden; /* Biar gak bisa discroll */
+            background-color: #fdf2f8; 
+            overflow: hidden; 
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* --- SCREEN 1: AMPLOP BIRU --- */
+        /* --- LAYAR 1: AMPLOP --- */
         #screen-envelope {
             position: absolute;
             width: 100%; height: 100%;
-            background: #e6f7ff; /* Biru muda background */
+            background: #e0f2fe; /* Biru muda kalem */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 4;
+            z-index: 10;
             transition: transform 1s ease-in-out;
         }
 
         .envelope-wrapper {
             position: relative;
-            width: 300px;
-            height: 200px;
-            background: #4dabf7; /* Biru Amplop */
-            border-radius: 5px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            width: 300px; height: 200px;
+            background: #3b82f6; /* Biru lebih fresh */
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
-        /* Segitiga tutup amplop */
-        .envelope-wrapper::before {
+        .envelope-wrapper::before { /* Segitiga tutup amplop */
             content: '';
             position: absolute;
             top: 0; left: 0;
             border-left: 150px solid transparent;
             border-right: 150px solid transparent;
-            border-top: 110px solid #74c0fc; /* Biru lebih terang */
+            border-top: 120px solid #60a5fa;
             z-index: 2;
         }
 
-        /* Isi kertas (sedikit ngintip) */
-        .paper {
-            position: absolute;
-            top: 10px; left: 15px;
-            width: 270px; height: 180px;
-            background: white;
-            transition: top 0.5s;
-        }
-
-        /* Tombol Love */
         .heart-btn {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3rem;
-            color: #ff6b6b;
+            font-size: 4rem;
+            color: #ef4444;
             z-index: 5;
-            cursor: pointer;
             animation: beat 1s infinite;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
         }
 
         @keyframes beat {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.2); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
-        /* --- SCREEN 2: UCAPAN --- */
+        /* --- LAYAR 2: UCAPAN --- */
         #screen-message {
             position: absolute;
             width: 100%; height: 100%;
-            background: #fff0f6; /* Pink lembut */
-            display: none; /* Disembunyikan dulu */
+            background: #fff1f2;
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 30px;
-            text-align: center;
-            z-index: 3;
+            z-index: 5;
             opacity: 0;
             transition: opacity 1s;
         }
 
         .message-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             max-width: 500px;
+            text-align: center;
+            border: 2px solid #fecdd3;
         }
 
         .message-text {
             font-size: 1.1rem;
-            color: #444;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 25px;
         }
 
-        .next-btn {
-            background: #ff6b6b;
+        .btn-lanjut {
+            background: #f43f5e;
             color: white;
             border: none;
-            padding: 10px 25px;
+            padding: 12px 30px;
             border-radius: 50px;
             font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(244, 63, 94, 0.4);
         }
 
-        /* --- SCREEN 3: KUE & LILIN --- */
+        /* --- LAYAR 3: KUE & LILIN (ESTETIK) --- */
         #screen-cake {
             position: absolute;
             width: 100%; height: 100%;
-            background: #222; /* Gelap biar lilin kelihatan */
+            background: #111827; /* Gelap elegan */
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 2;
+            z-index: 4;
             color: white;
+            transition: opacity 1s;
         }
 
-        .cake {
+        .cake-container {
             position: relative;
-            width: 250px; height: 200px;
             margin-top: 50px;
         }
-        
+
         .cake-body {
-            position: absolute; bottom: 0;
-            width: 100%; height: 100px;
-            background: #f06595;
-            border-radius: 10px 10px 0 0;
+            width: 200px; height: 120px;
+            background: linear-gradient(to right, #ec4899, #db2777);
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+        
+        .icing {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 30px;
+            background: #fbcfe8;
+            border-radius: 15px 15px 10px 10px;
         }
 
         .candle {
-            position: absolute; bottom: 100px; left: 50%;
-            width: 20px; height: 80px;
-            background: white;
+            position: absolute; bottom: 120px; left: 50%;
+            width: 15px; height: 80px;
+            background: linear-gradient(to right, #fff, #e5e7eb);
             transform: translateX(-50%);
-            border-radius: 5px;
+            border-radius: 4px;
         }
 
-        /* Api Lilin */
+        /* Api Lilin Realistis */
         .flame {
-            position: absolute; top: -30px; left: 50%;
-            width: 20px; height: 30px;
-            background: orange;
+            position: absolute; top: -35px; left: 50%;
+            width: 20px; height: 35px;
+            background: radial-gradient(ellipse at bottom, #fde047 0%, #f97316 60%, transparent 100%);
             border-radius: 50% 50% 20% 20%;
             transform: translateX(-50%);
-            box-shadow: 0 0 10px orange, 0 0 20px yellow;
-            animation: flicker 0.5s infinite alternate;
+            filter: blur(1px);
+            box-shadow: 0 0 20px #facc15, 0 0 40px #f97316;
+            animation: flicker 0.1s infinite alternate;
             cursor: pointer;
         }
 
         @keyframes flicker {
-            from { opacity: 1; transform: translateX(-50%) scale(1); }
-            to { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+            0% { transform: translateX(-50%) scale(1) skewX(2deg); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1.05) skewX(-2deg); opacity: 0.9; }
         }
 
-        /* --- SCREEN 4: GALERI FOTO --- */
+        /* --- LAYAR 4: KADO MISTERIUS --- */
+        #screen-gift {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: #fdf2f8;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 3;
+        }
+
+        /* Kotak Kado */
+        .gift-box {
+            position: relative;
+            width: 150px; height: 150px;
+            background: #f43f5e;
+            cursor: pointer;
+            animation: shake 2s infinite; /* Animasi goyang */
+            border-radius: 10px;
+        }
+
+        .gift-lid {
+            position: absolute; top: -20px; left: -10px;
+            width: 170px; height: 40px;
+            background: #fb7185;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .gift-ribbon {
+            position: absolute; top: 0; left: 50%;
+            width: 30px; height: 100%;
+            background: #fff;
+            transform: translateX(-50%);
+        }
+        
+        .gift-lid .gift-ribbon { height: 100%; }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+
+        /* --- LAYAR 5: GALERI (POP UP) --- */
         #screen-gallery {
             position: absolute;
             width: 100%; height: 100%;
@@ -178,34 +222,31 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1;
+            z-index: 2;
         }
 
-        .gallery-container {
-            width: 90%;
-            max-width: 400px;
+        .gallery-wrapper {
+            width: 90%; max-width: 400px;
             text-align: center;
+            transform: scale(0); /* Mulai dari kecil */
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .photo-frame {
-            width: 100%;
-            height: 400px;
             border: 10px solid white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border-radius: 15px;
             overflow: hidden;
-            border-radius: 10px;
-            position: relative;
-            margin-bottom: 20px;
+            aspect-ratio: 3/4; /* Rasio foto potrait */
         }
 
         .photo-frame img {
             width: 100%; height: 100%;
             object-fit: cover;
             display: none;
-            animation: fadeIn 1s;
         }
 
-        /* Efek Confetti */
+        /* Confetti */
         .confetti {
             position: absolute;
             width: 10px; height: 10px;
@@ -213,7 +254,6 @@
             animation: fall linear forwards;
         }
         @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     </style>
 </head>
@@ -223,35 +263,48 @@
         <div class="envelope-wrapper" onclick="bukaAmplop()">
             <div class="heart-btn">❤️</div>
         </div>
-        <p style="margin-top: 20px; color: #555;">Ketuk LOVE untuk membuka surat</p>
+        <p style="margin-top: 30px; color: #64748b; font-size: 0.9rem;">Ketuk LOVE untuk membuka</p>
     </div>
 
     <div id="screen-message">
         <div class="message-card">
-            <h2 style="color: #d63384; margin-bottom:15px;">Happy Birthday!</h2>
+            <h2 style="color: #be185d; margin-bottom: 15px;">Happy Birthday Sayang!</h2>
             <p class="message-text">
                 "Selamat ulang tahun sayang, di hari ini kamu sudah mulai dewasa dan aku selalu berdoa apa yang kamu dan kita semogakan semoga segera tersemogakan. <br><br>
                 Di hari ini adalah di mana kamu akan merasa lebih banyak dan berat atas kewajiban km tapi jangan lupa sayang aku akan selalau ada di samping kamu.<br><br>
                 <b>LOVE YOU SAYANG 🫣</b>"
             </p>
-            <button class="next-btn" onclick="keLilin()">Lanjut ❤️</button>
+            <button class="btn-lanjut" onclick="lanjutKeLilin()">Lanjut ❤️</button>
         </div>
     </div>
 
     <div id="screen-cake">
-        <h2 style="margin-bottom: 30px;">Make a Wish... ✨</h2>
-        <div class="cake">
+        <h2 style="margin-bottom: 20px; font-weight: 300;">Make a Wish... ✨</h2>
+        <div class="cake-container">
             <div class="candle">
                 <div class="flame" id="api" onclick="tiupLilin()"></div>
             </div>
-            <div class="cake-body"></div>
+            <div class="cake-body">
+                <div class="icing"></div>
+            </div>
         </div>
-        <p style="margin-top: 50px; font-size: 0.9rem;">(Ketuk apinya untuk meniup lilin)</p>
+        <p style="margin-top: 50px; opacity: 0.7; font-size: 0.9rem;">Ketuk api untuk meniup lilin</p>
+    </div>
+
+    <div id="screen-gift">
+        <h2 style="color: #be185d; margin-bottom: 30px;">Yeay! Ada kado buat kamu 🎁</h2>
+        <div class="gift-box" onclick="bukaKado()">
+            <div class="gift-lid">
+                <div class="gift-ribbon"></div>
+            </div>
+            <div class="gift-ribbon"></div>
+        </div>
+        <p style="margin-top: 20px; color: #888;">(Ketuk kado untuk membuka)</p>
     </div>
 
     <div id="screen-gallery">
-        <h2 style="color: #d63384; margin-bottom: 20px;">Ini Kenangan Kita 🎁</h2>
-        <div class="gallery-container">
+        <h2 style="color: #be185d; margin-bottom: 20px;">Kenangan Kita ❤️</h2>
+        <div class="gallery-wrapper" id="galeri-container">
             <div class="photo-frame">
                 <img class="slide-foto" src="foto1.jpg">
                 <img class="slide-foto" src="foto2.jpg">
@@ -259,55 +312,58 @@
                 <img class="slide-foto" src="foto4.jpg">
                 <img class="slide-foto" src="foto5.jpg">
             </div>
-            <p>Geser otomatis setiap 3 detik...</p>
+            <p style="margin-top: 15px; color: #666;">Foto berganti otomatis...</p>
         </div>
     </div>
 
     <script>
-        // Fungsi Buka Amplop
+        // 1. Buka Amplop
         function bukaAmplop() {
-            const amplop = document.getElementById('screen-envelope');
-            const surat = document.getElementById('screen-message');
-            
-            // Efek amplop naik ke atas
-            amplop.style.transform = 'translateY(-100vh)';
-            
-            // Munculkan surat
-            surat.style.display = 'flex';
-            setTimeout(() => {
-                surat.style.opacity = '1';
-            }, 500);
+            document.getElementById('screen-envelope').style.transform = 'translateY(-100vh)';
+            const msg = document.getElementById('screen-message');
+            msg.style.display = 'flex';
+            setTimeout(() => { msg.style.opacity = '1'; }, 500);
         }
 
-        // Fungsi ke Layar Lilin
-        function keLilin() {
+        // 2. Lanjut ke Lilin
+        function lanjutKeLilin() {
             document.getElementById('screen-message').style.display = 'none';
             document.getElementById('screen-cake').style.display = 'flex';
         }
 
-        // Fungsi Tiup Lilin
+        // 3. Tiup Lilin
         function tiupLilin() {
-            const api = document.getElementById('api');
-            api.style.display = 'none'; // Api hilang
+            document.getElementById('api').style.display = 'none'; // Api mati
             
             setTimeout(() => {
-                alert("Yeay! Lilin sudah padam! Sekarang buka kadonya ya 🎁");
-                bukaGaleri();
-            }, 500);
+                // Pindah ke layar kado
+                document.getElementById('screen-cake').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('screen-cake').style.display = 'none';
+                    document.getElementById('screen-gift').style.display = 'flex';
+                }, 1000);
+            }, 800);
         }
 
-        // Fungsi Buka Galeri
-        function bukaGaleri() {
-            document.getElementById('screen-cake').style.display = 'none';
-            document.getElementById('screen-gallery').style.display = 'flex';
+        // 4. Buka Kado (Pop Up Galeri)
+        function bukaKado() {
+            document.getElementById('screen-gift').style.display = 'none';
+            const galeriScreen = document.getElementById('screen-gallery');
+            const galeriContainer = document.getElementById('galeri-container');
             
-            // Jalankan Slideshow
+            galeriScreen.style.display = 'flex';
+            
+            // Efek Pop Up (Zoom In)
+            setTimeout(() => {
+                galeriContainer.style.transform = 'scale(1)';
+            }, 100);
+
+            // Mulai Slideshow & Confetti
             showSlides();
-            // Jalankan Confetti
             buatConfetti();
         }
 
-        // Logika Slideshow Otomatis
+        // Logic Slideshow
         let slideIndex = 0;
         function showSlides() {
             let i;
@@ -318,12 +374,12 @@
             slideIndex++;
             if (slideIndex > slides.length) {slideIndex = 1}    
             slides[slideIndex-1].style.display = "block";  
-            setTimeout(showSlides, 3000); // Ganti gambar setiap 3 detik
+            setTimeout(showSlides, 3000); 
         }
 
-        // Efek Confetti
+        // Logic Confetti
         function buatConfetti() {
-            const colors = ['#ff0', '#f00', '#0f0', '#00f', '#f0f'];
+            const colors = ['#f43f5e', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
             for (let i = 0; i < 100; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
