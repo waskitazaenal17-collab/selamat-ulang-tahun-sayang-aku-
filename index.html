@@ -2,392 +2,354 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spesial Untukmu ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Intan</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
-        /* --- RESET & BASIC STYLE --- */
+        /* --- VARIABLE SYSTEM --- */
+        :root {
+            --bg-color: #FDFBF7; /* Cream White (Kertas Mewah) */
+            --accent-pink: #D4A5A5; /* Dusty Pink Muted */
+            --accent-blue: #9FB1BC; /* Slate Blue Muted */
+            --text-dark: #2D2D2D;
+            --text-light: #6E6E6E;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #fdf2f8; 
-            overflow: hidden; 
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
             height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* --- LAYAR 1: AMPLOP --- */
-        #screen-envelope {
+        /* --- LAYAR (SCREENS) --- */
+        .screen {
             position: absolute;
+            top: 0; left: 0;
             width: 100%; height: 100%;
-            background: #e0f2fe; /* Biru muda kalem */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 10;
-            transition: transform 1s ease-in-out;
+            padding: 20px;
+            transition: opacity 1s ease-in-out, transform 1s ease;
         }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* --- SCREEN 1: ENVELOPE (MINIMALIS) --- */
+        #screen-1 { background-color: #F2F4F6; z-index: 10; }
 
         .envelope-wrapper {
             position: relative;
-            width: 300px; height: 200px;
-            background: #3b82f6; /* Biru lebih fresh */
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .envelope-wrapper:active { transform: scale(0.95); }
+
+        .envelope {
+            width: 300px; height: 200px;
+            background-color: var(--accent-blue);
+            border-radius: 6px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
-        .envelope-wrapper::before { /* Segitiga tutup amplop */
+
+        .envelope::before { /* Flap Atas */
             content: '';
-            position: absolute;
-            top: 0; left: 0;
+            position: absolute; top: 0; left: 0;
             border-left: 150px solid transparent;
             border-right: 150px solid transparent;
-            border-top: 120px solid #60a5fa;
+            border-top: 130px solid #BCCCDC; /* Sedikit lebih terang */
             z-index: 2;
+            transform-origin: top;
+            transition: transform 0.8s ease;
         }
 
-        .heart-btn {
-            font-size: 4rem;
-            color: #ef4444;
-            z-index: 5;
-            animation: beat 1s infinite;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
-        }
-
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        /* --- LAYAR 2: UCAPAN --- */
-        #screen-message {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: #fff1f2;
-            display: none;
-            flex-direction: column;
+        .seal {
+            width: 45px; height: 45px;
+            background-color: #C08497; /* Merah hati mati */
+            border-radius: 50%;
+            color: white;
+            display: flex;
             justify-content: center;
             align-items: center;
-            padding: 30px;
-            z-index: 5;
-            opacity: 0;
-            transition: opacity 1s;
+            font-size: 20px;
+            z-index: 3;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border: 2px solid rgba(255,255,255,0.2);
         }
 
-        .message-card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .hint {
+            margin-top: 40px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            animation: pulse 2s infinite;
+        }
+
+        /* --- SCREEN 2: LETTER (TYPOGRAPHY) --- */
+        #screen-2 { z-index: 9; background: #FFF; }
+
+        .letter-container {
             max-width: 500px;
             text-align: center;
-            border: 2px solid #fecdd3;
+            padding: 40px;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
         }
 
-        .message-text {
-            font-size: 1.1rem;
-            color: #4b5563;
-            line-height: 1.7;
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--accent-pink);
             margin-bottom: 25px;
+            line-height: 1.2;
         }
 
-        .btn-lanjut {
-            background: #f43f5e;
-            color: white;
+        p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .highlight {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .btn-main {
+            background: var(--text-dark);
+            color: #fff;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 35px;
             border-radius: 50px;
-            font-size: 1rem;
-            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(244, 63, 94, 0.4);
+            transition: background 0.3s;
         }
 
-        /* --- LAYAR 3: KUE & LILIN (ESTETIK) --- */
-        #screen-cake {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: #111827; /* Gelap elegan */
-            display: none;
-            flex-direction: column;
+        /* --- SCREEN 3: CAKE (CINEMATIC DARK) --- */
+        #screen-3 {
+            z-index: 8;
+            background-color: #1A1A1A; /* Hampir hitam */
+            color: #FFF;
+        }
+
+        .candle-container {
+            position: relative;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
             justify-content: center;
-            align-items: center;
-            z-index: 4;
-            color: white;
-            transition: opacity 1s;
-        }
-
-        .cake-container {
-            position: relative;
-            margin-top: 50px;
-        }
-
-        .cake-body {
-            width: 200px; height: 120px;
-            background: linear-gradient(to right, #ec4899, #db2777);
-            border-radius: 15px 15px 0 0;
-            position: relative;
-        }
-        
-        .icing {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 30px;
-            background: #fbcfe8;
-            border-radius: 15px 15px 10px 10px;
         }
 
         .candle {
-            position: absolute; bottom: 120px; left: 50%;
-            width: 15px; height: 80px;
-            background: linear-gradient(to right, #fff, #e5e7eb);
-            transform: translateX(-50%);
-            border-radius: 4px;
+            width: 12px; height: 100px;
+            background: #E0E0E0;
+            border-radius: 6px;
+            position: relative;
         }
 
-        /* Api Lilin Realistis */
         .flame {
-            position: absolute; top: -35px; left: 50%;
-            width: 20px; height: 35px;
-            background: radial-gradient(ellipse at bottom, #fde047 0%, #f97316 60%, transparent 100%);
+            width: 18px; height: 30px;
+            background: rgba(255, 200, 100, 0.9);
             border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -35px; left: 50%;
             transform: translateX(-50%);
-            filter: blur(1px);
-            box-shadow: 0 0 20px #facc15, 0 0 40px #f97316;
-            animation: flicker 0.1s infinite alternate;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.6), 0 0 40px rgba(255, 165, 0, 0.3);
+            animation: flicker 2s infinite alternate;
+            filter: blur(0.5px);
             cursor: pointer;
+            z-index: 10;
+        }
+
+        .smoke {
+            position: absolute; top: -40px; left: 50%;
+            width: 10px; height: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            opacity: 0;
+            transform: translateX(-50%);
         }
 
         @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1) skewX(2deg); opacity: 1; }
-            100% { transform: translateX(-50%) scale(1.05) skewX(-2deg); opacity: 0.9; }
+            0% { transform: translateX(-50%) scale(1); opacity: 1; }
+            100% { transform: translateX(-50%) scale(0.9) rotate(2deg); opacity: 0.85; }
         }
 
-        /* --- LAYAR 4: KADO MISTERIUS --- */
-        #screen-gift {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: #fdf2f8;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 3;
+        @keyframes smokeRise {
+            0% { opacity: 0.6; transform: translateX(-50%) translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateX(-60%) translateY(-100px) scale(3); }
         }
 
-        /* Kotak Kado */
-        .gift-box {
-            position: relative;
-            width: 150px; height: 150px;
-            background: #f43f5e;
-            cursor: pointer;
-            animation: shake 2s infinite; /* Animasi goyang */
-            border-radius: 10px;
-        }
-
-        .gift-lid {
-            position: absolute; top: -20px; left: -10px;
-            width: 170px; height: 40px;
-            background: #fb7185;
-            border-radius: 5px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        }
-
-        .gift-ribbon {
-            position: absolute; top: 0; left: 50%;
-            width: 30px; height: 100%;
-            background: #fff;
-            transform: translateX(-50%);
-        }
-        
-        .gift-lid .gift-ribbon { height: 100%; }
-
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(3deg); }
-            75% { transform: rotate(-3deg); }
-        }
-
-        /* --- LAYAR 5: GALERI (POP UP) --- */
-        #screen-gallery {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: #fff;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-        }
-
-        .gallery-wrapper {
-            width: 90%; max-width: 400px;
+        /* --- SCREEN 4: FINAL MESSAGE (PENGGANTI FOTO) --- */
+        #screen-4 {
+            z-index: 7;
+            background: #FDFBF7;
             text-align: center;
-            transform: scale(0); /* Mulai dari kecil */
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .photo-frame {
-            border: 10px solid white;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            border-radius: 15px;
-            overflow: hidden;
-            aspect-ratio: 3/4; /* Rasio foto potrait */
+        .final-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--accent-pink);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.5s ease;
         }
 
-        .photo-frame img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            display: none;
+        .sub-text {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: var(--text-light);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.5s ease 0.5s; /* Delay muncul */
         }
 
-        /* Confetti */
-        .confetti {
-            position: absolute;
-            width: 10px; height: 10px;
-            background-color: #f00;
-            animation: fall linear forwards;
+        .big-heart {
+            font-size: 5rem;
+            color: #C08497;
+            margin-top: 40px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
         }
-        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
+
+        /* Utility */
+        .show-up { opacity: 1 !important; transform: translateY(0) !important; }
+        .pop-up { opacity: 1 !important; transform: scale(1) !important; }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
     </style>
 </head>
 <body>
 
-    <div id="screen-envelope">
-        <div class="envelope-wrapper" onclick="bukaAmplop()">
-            <div class="heart-btn">❤️</div>
+    <div id="screen-1" class="screen">
+        <div class="envelope-wrapper" onclick="openEnvelope()">
+            <div class="envelope">
+                <div class="seal">❤️</div>
+            </div>
         </div>
-        <p style="margin-top: 30px; color: #64748b; font-size: 0.9rem;">Ketuk LOVE untuk membuka</p>
+        <div class="hint">Ketuk untuk membuka</div>
     </div>
 
-    <div id="screen-message">
-        <div class="message-card">
-            <h2 style="color: #be185d; margin-bottom: 15px;">Happy Birthday Sayang!</h2>
-            <p class="message-text">
-                "Selamat ulang tahun sayang, di hari ini kamu sudah mulai dewasa dan aku selalu berdoa apa yang kamu dan kita semogakan semoga segera tersemogakan. <br><br>
-                Di hari ini adalah di mana kamu akan merasa lebih banyak dan berat atas kewajiban km tapi jangan lupa sayang aku akan selalau ada di samping kamu.<br><br>
-                <b>LOVE YOU SAYANG 🫣</b>"
+    <div id="screen-2" class="screen hidden">
+        <div class="letter-container">
+            <h1>Dearest Intan,</h1>
+            <p>
+                "Selamat ulang tahun sayang. Di hari ini kamu mulai dewasa, dan aku selalu berdoa apa yang kamu dan kita semogakan, segera tersemogakan.<br><br>
+                Mungkin kewajibanmu akan terasa lebih berat, tapi ingat, <span class="highlight">aku akan selalu ada di samping kamu.</span>"
             </p>
-            <button class="btn-lanjut" onclick="lanjutKeLilin()">Lanjut ❤️</button>
+            <p style="font-size: 0.8rem; margin-top: -10px; color: #999;">— Zaenal</p>
+            <button class="btn-main" onclick="toCake()">Make a Wish</button>
         </div>
     </div>
 
-    <div id="screen-cake">
-        <h2 style="margin-bottom: 20px; font-weight: 300;">Make a Wish... ✨</h2>
-        <div class="cake-container">
+    <div id="screen-3" class="screen hidden">
+        <h2 style="font-family: 'Playfair Display'; font-weight: 400; margin-bottom: 80px; letter-spacing: 2px;">Make a Wish...</h2>
+        <div class="candle-container">
             <div class="candle">
-                <div class="flame" id="api" onclick="tiupLilin()"></div>
-            </div>
-            <div class="cake-body">
-                <div class="icing"></div>
+                <div class="flame" id="flame" onclick="blowCandle()"></div>
+                <div class="smoke" id="smoke"></div>
             </div>
         </div>
-        <p style="margin-top: 50px; opacity: 0.7; font-size: 0.9rem;">Ketuk api untuk meniup lilin</p>
+        <p style="margin-top: 60px; font-size: 0.75rem; opacity: 0.5; letter-spacing: 1px;">KETUK API UNTUK MENIUP</p>
     </div>
 
-    <div id="screen-gift">
-        <h2 style="color: #be185d; margin-bottom: 30px;">Yeay! Ada kado buat kamu 🎁</h2>
-        <div class="gift-box" onclick="bukaKado()">
-            <div class="gift-lid">
-                <div class="gift-ribbon"></div>
-            </div>
-            <div class="gift-ribbon"></div>
-        </div>
-        <p style="margin-top: 20px; color: #888;">(Ketuk kado untuk membuka)</p>
-    </div>
-
-    <div id="screen-gallery">
-        <h2 style="color: #be185d; margin-bottom: 20px;">Kenangan Kita ❤️</h2>
-        <div class="gallery-wrapper" id="galeri-container">
-            <div class="photo-frame">
-                <img class="slide-foto" src="foto1.jpg">
-                <img class="slide-foto" src="foto2.jpg">
-                <img class="slide-foto" src="foto3.jpg">
-                <img class="slide-foto" src="foto4.jpg">
-                <img class="slide-foto" src="foto5.jpg">
-            </div>
-            <p style="margin-top: 15px; color: #666;">Foto berganti otomatis...</p>
-        </div>
+    <div id="screen-4" class="screen hidden">
+        <div class="final-text">Happy Birthday</div>
+        <div class="sub-text">Once again, I love you.</div>
+        <div class="big-heart">❤️</div>
     </div>
 
     <script>
-        // 1. Buka Amplop
-        function bukaAmplop() {
-            document.getElementById('screen-envelope').style.transform = 'translateY(-100vh)';
-            const msg = document.getElementById('screen-message');
-            msg.style.display = 'flex';
-            setTimeout(() => { msg.style.opacity = '1'; }, 500);
-        }
+        // Transisi Amplop ke Surat
+        function openEnvelope() {
+            const flap = document.querySelector('.envelope::before');
+            const screen1 = document.getElementById('screen-1');
+            const screen2 = document.getElementById('screen-2');
 
-        // 2. Lanjut ke Lilin
-        function lanjutKeLilin() {
-            document.getElementById('screen-message').style.display = 'none';
-            document.getElementById('screen-cake').style.display = 'flex';
-        }
-
-        // 3. Tiup Lilin
-        function tiupLilin() {
-            document.getElementById('api').style.display = 'none'; // Api mati
+            // Animasi CSS manual lewat style
+            document.querySelector('.envelope').style.transform = "scale(1.2)";
+            // Efek membuka flap tidak bisa sempurna lewat JS inline di pseudo-element, 
+            // jadi kita mainkan opacity layar saja agar smooth.
             
+            screen1.style.opacity = '0';
             setTimeout(() => {
-                // Pindah ke layar kado
-                document.getElementById('screen-cake').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('screen-cake').style.display = 'none';
-                    document.getElementById('screen-gift').style.display = 'flex';
-                }, 1000);
+                screen1.classList.add('hidden');
+                screen2.classList.remove('hidden');
             }, 800);
         }
 
-        // 4. Buka Kado (Pop Up Galeri)
-        function bukaKado() {
-            document.getElementById('screen-gift').style.display = 'none';
-            const galeriScreen = document.getElementById('screen-gallery');
-            const galeriContainer = document.getElementById('galeri-container');
-            
-            galeriScreen.style.display = 'flex';
-            
-            // Efek Pop Up (Zoom In)
+        // Transisi Surat ke Kue
+        function toCake() {
+            const screen2 = document.getElementById('screen-2');
+            const screen3 = document.getElementById('screen-3');
+
+            screen2.style.opacity = '0';
             setTimeout(() => {
-                galeriContainer.style.transform = 'scale(1)';
-            }, 100);
-
-            // Mulai Slideshow & Confetti
-            showSlides();
-            buatConfetti();
+                screen2.classList.add('hidden');
+                screen3.classList.remove('hidden');
+            }, 800);
         }
 
-        // Logic Slideshow
-        let slideIndex = 0;
-        function showSlides() {
-            let i;
-            let slides = document.getElementsByClassName("slide-foto");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}    
-            slides[slideIndex-1].style.display = "block";  
-            setTimeout(showSlides, 3000); 
-        }
+        // Transisi Tiup Lilin ke Final
+        function blowCandle() {
+            const flame = document.getElementById('flame');
+            const smoke = document.getElementById('smoke');
+            const screen3 = document.getElementById('screen-3');
+            const screen4 = document.getElementById('screen-4');
 
-        // Logic Confetti
-        function buatConfetti() {
-            const colors = ['#f43f5e', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
-            for (let i = 0; i < 100; i++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                document.body.appendChild(confetti);
-            }
+            // Api Mati
+            flame.style.opacity = '0';
+            flame.style.transform = 'scale(0)';
+            
+            // Asap Muncul
+            smoke.style.animation = 'smokeRise 2s forwards';
+
+            // Pindah Layar
+            setTimeout(() => {
+                screen3.style.opacity = '0';
+                setTimeout(() => {
+                    screen3.classList.add('hidden');
+                    screen4.classList.remove('hidden');
+                    
+                    // Animasi Final Text Muncul
+                    setTimeout(() => {
+                        document.querySelector('.final-text').classList.add('show-up');
+                        document.querySelector('.sub-text').classList.add('show-up');
+                        document.querySelector('.big-heart').classList.add('pop-up');
+                    }, 100);
+
+                }, 1000);
+            }, 1500);
         }
     </script>
 </body>
